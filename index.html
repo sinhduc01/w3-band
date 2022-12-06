@@ -8,6 +8,7 @@
     <title>The Band</title>
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/431/431238.png" type="image/x-icon">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/responsive.css">
     <link rel="stylesheet" href="./assets/fonts/themify-icons/themify-icons.css">
 </head>
 
@@ -42,6 +43,17 @@
                 </i>
             </div>
             <!-- End: Search Button -->
+
+            <!-- Begin: Mobile Menu Button -->
+
+            <div id="mobile-menu" class="mobile-menu-btn">
+                <i class="menu-icon ti-menu">
+
+                </i>
+            </div>
+            <!-- End: Mobile Menu Button -->
+
+
         </div>
         <!-- Begin: Slider -->
         <div id="slider">
@@ -216,6 +228,9 @@
             </div>
         </div>
         <!-- End: Buy ticket modal -->
+
+
+        <!-- Modal mua vé khi click vào Buy Ticket -->
         <script>
             const buyBtns = document.querySelectorAll('.js-buy-ticket')
             const modal = document.querySelector('.js-modal')
@@ -242,6 +257,34 @@
                 event.stopPropagation()
             })
         </script>
+        <!-- Đóng mở menu trên mobile -->
+        <script>
+            var header = document.getElementById('header')
+            var mobileMenu = document.getElementById('mobile-menu')
+            var headerHeight = header.clientHeight;
+            mobileMenu.onclick = function () {
+                var isClose = header.clientHeight === headerHeight
+                if (isClose) {
+                    header.style.height = 'auto'
+                } else {
+                    header.style.height = null
+                }
+            }
+            var menuItems = document.querySelectorAll('#nav li a[href*="#"]')
+            for (var i = 0; i < menuItems.length; i++) {
+                var menuItem = menuItems[i]
+
+                menuItem.onclick = function () {
+                    var isParentMenu = this.nextElementSibling && this.nextElementSibling.classList.contains('subnav')
+                    if (isParentMenu) {
+                        event.preventDefault()
+                    } else {
+                        header.style.height = null
+                    }
+                }
+            }
+        </script>
+
 </body>
 
 </html>
